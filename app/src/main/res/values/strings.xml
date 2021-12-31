@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WorkoutIn</string>
+    <string name="start">Start</string>
+    <string name="running_title">Running</string>
+    <string name="running_description">A joyfull investment in your body, mind and spirit.</string>
+
 </resources>

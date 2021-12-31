@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:backgroundTint="@color/background_card_color"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/small_margin"
+    app:cardCornerRadius="@dimen/card_radius"
+    android:elevation="@dimen/card_elevation">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/workout_section_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="@dimen/normal_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tool:src="@mipmap/chest" />
+
+        <TextView
+            android:id="@+id/workout_section_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/medium_text_size"
+            android:textColor="@color/dark_bleu"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintStart_toEndOf="@+id/workout_section_img"
+            app:layout_constraintTop_toTopOf="@+id/workout_section_img"
+            tool:text="Chest"
+            android:layout_marginStart="@dimen/normal_margin"/>
+
+        <TextView
+            android:id="@+id/workout_section_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/normal_margin"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textColor="@color/black"
+            android:textSize="@dimen/small_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/workout_section_img"
+            app:layout_constraintTop_toBottomOf="@+id/workout_section_title"
+            tool:text="Target your chest fat with high intensity workout. No embarrassing man boobs when taking T-shirt off" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

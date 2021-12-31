@@ -2,6 +2,7 @@ package com.fakhour.workoutin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.fakhour.workoutin.workout.WorkoutListFragment
 import com.rbddevs.splashy.Splashy
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +16,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragment_container)
 
         if (currentFragment == null) {
-            val fragment = CrimeListFragment.newInstance()
+            val fragment = WorkoutListFragment.newInstance()
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.fragment_container, fragment)
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             .setTitleColor("#FFFFFF")
             .setSubTitle("Home workout made easy")
             .setProgressColor(R.color.white)
-            .setBackgroundResource(R.color.purple_700)
+            .setBackgroundResource(R.mipmap.background)
             .setFullScreen(true)
             .setDuration(2000)
             .show()
