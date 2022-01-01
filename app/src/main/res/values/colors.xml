@@ -12,5 +12,6 @@
     <color name="dark_bleu">#FF28027C</color>
     <color name="sky_bleu">#00E5FF</color>
     <color name="background_card_color">#F9F9FB</color>
+    <color name="dark_gray">#757575</color>
 
 </resources>

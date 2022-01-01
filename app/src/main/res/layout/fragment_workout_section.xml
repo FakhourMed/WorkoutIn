@@ -4,21 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <com.fakhour.workoutin.workout.custom_views.CustomHeader
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        app:header_title="@string/running_title"
-        app:layout_constraintTop_toTopOf="parent"/>
 
     <include
-        android:id="@+id/section_summary_layout"
-        layout="@layout/section_summary_layout"
+        android:id="@+id/running_layout"
+        layout="@layout/running_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/workout_sections_recycler"
@@ -28,6 +22,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/section_summary_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/running_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

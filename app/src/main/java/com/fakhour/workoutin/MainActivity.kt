@@ -2,7 +2,6 @@ package com.fakhour.workoutin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.fakhour.workoutin.workout.WorkoutListFragment
 import com.rbddevs.splashy.Splashy
 
 class MainActivity : AppCompatActivity() {
@@ -11,21 +10,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setSplashy()
-
+/*
         val currentFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container)
 
         if (currentFragment == null) {
-            val fragment = WorkoutListFragment.newInstance()
+            val fragment = WorkoutSectionFragment.newInstance()
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.fragment_container, fragment)
                 .commit()
         }
-    }
+ */   }
 
     fun setSplashy(){
-        Splashy(this) 		 // For JAVA : new Splashy(this)
+        Splashy(this)
             .setLogo(R.drawable.ic_logo)
             .setTitle("WorkoutIN")
             .setTitleColor("#FFFFFF")

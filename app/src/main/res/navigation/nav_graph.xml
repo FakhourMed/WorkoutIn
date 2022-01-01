@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/workout_section_fragment">
+
+    <fragment
+        android:id="@+id/workout_section_fragment"
+        android:name="com.fakhour.workoutin.workout.workout_sections.WorkoutSectionFragment"
+        android:label="workout_section_fragment"
+        tools:layout="@layout/fragment_workout_section">
+
+        <action android:id="@+id/action_workout_section_to_workout_list"
+            app:destination="@id/workout_list_fragment"
+            app:enterAnim="@anim/enter"
+            app:exitAnim="@anim/exit"
+            app:popEnterAnim="@anim/rev_enter"
+            app:popExitAnim="@anim/rev_exit"
+/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/workout_list_fragment"
+        android:name="com.fakhour.workoutin.workout.workout_list.WorkoutListFragment"
+        android:label="workout_list_fragment"
+        tools:layout="@layout/fragment_workout_list">
+
+        <action android:id="@+id/action_workout_list_to_workout_detail"
+            app:destination="@id/workout_detail_fragment"
+            app:enterAnim="@anim/enter"
+            app:exitAnim="@anim/exit"
+            app:popEnterAnim="@anim/rev_enter"
+            app:popExitAnim="@anim/rev_exit"
+
+/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/workout_detail_fragment"
+        android:name="com.fakhour.workoutin.workout.workout_detail.WorkoutDetailFragment"
+        android:label="workout_detail_fragment"
+        tools:layout="@layout/fragment_workout_detail">
+        <action android:id="@+id/action_workout_detail_to_workout_section"
+            app:enterAnim="@anim/enter"
+            app:exitAnim="@anim/exit"
+            app:popEnterAnim="@anim/rev_enter"
+            app:popExitAnim="@anim/rev_exit"/>
+
+    </fragment>
+</navigation>

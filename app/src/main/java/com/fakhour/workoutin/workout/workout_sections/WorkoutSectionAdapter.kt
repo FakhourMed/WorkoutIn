@@ -1,8 +1,7 @@
-package com.fakhour.workoutin.workout
+package com.fakhour.workoutin.workout.workout_sections
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,7 +10,7 @@ import com.fakhour.workoutin.databinding.WorkoutSectionItemBinding
 import com.fakhour.workoutin.workout.entities.WorkoutSection
 
 
-class WorkoutListAdapter(val mContext: Context, var workoutSectionList: ArrayList<WorkoutSection>?) :
+class WorkoutSectionAdapter(val mContext: Context, var workoutSectionList: ArrayList<WorkoutSection>?) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var _binding: WorkoutSectionItemBinding?= null
@@ -51,6 +50,10 @@ class WorkoutListAdapter(val mContext: Context, var workoutSectionList: ArrayLis
         this.workoutSectionList = _workoutSectionList
 
         notifyDataSetChanged()
+    }
+
+    fun setOnItemClickListener(onItemClickListener: ((position: Int) -> Unit)?) {
+        this.onItemClickListener = onItemClickListener
     }
 
     class ItemViewHolder(binding: WorkoutSectionItemBinding) : RecyclerView.ViewHolder(binding.root) {

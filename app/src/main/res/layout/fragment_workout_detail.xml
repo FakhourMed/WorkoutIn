@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.fakhour.workoutin.workout.custom_views.CustomHeader
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:header_title="@string/running_title"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.denzcoskun.imageslider.ImageSlider
+        android:id="@+id/workout_img"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:iss_auto_cycle="true"
+        app:iss_delay="1000"
+        app:iss_period="1000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header" />
+
+    <TextView
+        android:id="@+id/workout_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/medium_margin"
+        android:text="Alternate Heel Touches - 30 sec"
+        android:textSize="@dimen/medium_big_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/workout_img" />
+
+    <com.fakhour.workoutin.workout.custom_views.CountDownView
+        android:id="@+id/count_down_view"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:count_down_circle_starting_degree="-90"
+        app:count_down_max="30"
+        android:layout_margin="@dimen/small_margin"
+        app:count_down_progress="30"
+        app:count_down_text="@string/start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/workout_title"
+
+
+        />
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/start"
+        app:layout_constraintEnd_toEndOf="@+id/count_down_view"
+        app:layout_constraintStart_toStartOf="@+id/count_down_view"
+        app:layout_constraintTop_toBottomOf="@+id/count_down_view" />
+
+
+    <TextView
+        android:id="@+id/workout_title_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/medium_margin"
+        android:text="Alternate Heel Touches - 30 sec"
+        android:textSize="@dimen/medium_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnStart" />
+
+    <TextView
+        android:id="@+id/workout_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_margin"
+        android:text="Steps : \n
+1.) Start off lying on the floor with your knees bent, your feet on the floor at around 18 to 24 inches apart, and your arms extended by your side.\n
+2.) Once in the starting position, crunch forward over your torso to the right side and touche your right heel.\n
+3.) Hold this position for a few seconds, squeezing your abs and then return back to the starting position.\n
+4.) Switch to the other side, crunching over your torso on the left side and touching your left heel, squeezing your abs and holding the contraction for a count.\n
+5.) Return back to the starting position and alternate sides for the desired about of reps and sets."
+        android:textSize="@dimen/small_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/workout_title_small"
+        app:layout_constraintTop_toBottomOf="@id/workout_title_small" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

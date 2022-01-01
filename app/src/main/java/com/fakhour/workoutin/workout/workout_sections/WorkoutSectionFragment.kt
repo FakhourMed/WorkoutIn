@@ -1,26 +1,27 @@
-package com.fakhour.workoutin.workout
+package com.fakhour.workoutin.workout.workout_sections
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fakhour.workoutin.R
-import com.fakhour.workoutin.databinding.FragmentWorkoutListBinding
+import com.fakhour.workoutin.databinding.FragmentWorkoutSectionBinding
 import com.fakhour.workoutin.workout.entities.WorkoutSection
 
-class WorkoutListFragment: Fragment() {
+class WorkoutSectionFragment: Fragment() {
 
-    private var _binding: FragmentWorkoutListBinding?= null
+    private var _binding: FragmentWorkoutSectionBinding?= null
     private val binding get() = _binding!!
 
-    private lateinit var workoutListAdapter : WorkoutListAdapter
+    private lateinit var workoutSectionAdapter : WorkoutSectionAdapter
     var workoutSectionArrayList:ArrayList<WorkoutSection>? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentWorkoutListBinding.inflate(inflater,container, false)
+        _binding = FragmentWorkoutSectionBinding.inflate(inflater,container, false)
         val view = binding.root
         return view
     }
@@ -36,14 +37,18 @@ workoutSectionArrayList=arrayListOf(
     WorkoutSection(4, "Abs","Combined ABS workout with HIIT, you can melt away excess fat fast and make your six-pack visible easily", R.mipmap.abs ),
     WorkoutSection(5, "Back","Strengthen and mobilize your lower back. Relax back muscles and prevent back injuries", R.mipmap.back ),
 )
-        workoutListAdapter = WorkoutListAdapter(requireContext(), workoutSectionArrayList)
+        workoutSectionAdapter = WorkoutSectionAdapter(requireContext(), workoutSectionArrayList)
 
-        binding.workoutSectionsRecycler.adapter = workoutListAdapter
+        binding.workoutSectionsRecycler.adapter = workoutSectionAdapter
         binding.workoutSectionsRecycler.layoutManager = LinearLayoutManager(requireContext())
+
+        workoutSectionAdapter.setOnItemClickListener {
+            findNavController().navigate(R.id.action_workout_section_to_workout_list)
+        }
     }
     companion object {
-        fun newInstance(): WorkoutListFragment {
-            return WorkoutListFragment()
+        fun newInstance(): WorkoutSectionFragment {
+            return WorkoutSectionFragment()
         }
     }
 }
