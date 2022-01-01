@@ -1,4 +1,4 @@
-package com.fakhour.workoutin.workout.custom_views
+package com.fakhour.workoutin.common.custom_views
 import com.fakhour.workoutin.R
 import android.content.Context
 import android.content.res.TypedArray

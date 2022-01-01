@@ -2,6 +2,7 @@
     <string name="app_name">WorkoutIn</string>
     <string name="start">Start</string>
     <string name="pause">Pause</string>
+    <string name="paused">Paused</string>
     <string name="stop">Stop</string>
 
     <string name="running_title">Running</string>

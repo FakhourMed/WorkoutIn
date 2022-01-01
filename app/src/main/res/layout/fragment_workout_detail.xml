@@ -10,7 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.fakhour.workoutin.workout.custom_views.CustomHeader
+    <com.fakhour.workoutin.common.custom_views.CustomHeader
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -34,14 +34,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/medium_margin"
-        android:text="Alternate Heel Touches - 30 sec"
+        android:textColor="@color/dark_bleu"
+        tool:text="Alternate Heel Touches - 30 sec"
         android:textSize="@dimen/medium_big_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/workout_img" />
 
-    <com.fakhour.workoutin.workout.custom_views.CountDownView
+    <com.fakhour.workoutin.common.custom_views.CountDownView
         android:id="@+id/count_down_view"
         android:layout_width="120dp"
         android:layout_height="120dp"
@@ -73,7 +74,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/medium_margin"
-        android:text="Alternate Heel Touches - 30 sec"
+        android:textColor="@color/dark_bleu"
+        android:textStyle="bold"
+        tool:text="Alternate Heel Touches - 30 sec"
         android:textSize="@dimen/medium_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -85,7 +88,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/small_margin"
-        android:text="Steps : \n
+        tool:text="Steps : \n
 1.) Start off lying on the floor with your knees bent, your feet on the floor at around 18 to 24 inches apart, and your arms extended by your side.\n
 2.) Once in the starting position, crunch forward over your torso to the right side and touche your right heel.\n
 3.) Hold this position for a few seconds, squeezing your abs and then return back to the starting position.\n

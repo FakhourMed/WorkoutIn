@@ -1,20 +1,30 @@
 package com.fakhour.workoutin.workout.workout_sections
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fakhour.workoutin.R
 import com.fakhour.workoutin.databinding.FragmentWorkoutSectionBinding
 import com.fakhour.workoutin.workout.entities.WorkoutSection
 
+const val WORKOUT_SECTION_ID = "package com.fakhour.workoutin.workout.workout_sections.WORKOUT_SECTION_ID"
+
 class WorkoutSectionFragment: Fragment() {
 
     private var _binding: FragmentWorkoutSectionBinding?= null
     private val binding get() = _binding!!
+
+    private val workoutSectionViewModel:  WorkoutSectionViewModel by lazy {
+        ViewModelProvider(this).get(WorkoutSectionViewModel::class.java)
+    }
 
     private lateinit var workoutSectionAdapter : WorkoutSectionAdapter
     var workoutSectionArrayList:ArrayList<WorkoutSection>? = null
@@ -29,21 +39,25 @@ class WorkoutSectionFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-workoutSectionArrayList=arrayListOf(
-    WorkoutSection(0, "Full Body","A full-body workouts designed to challenge every muscle in your body. All you need is your body and a few feet of floor space, but you'll definitely feel like you've accomplished something", R.mipmap.all_body ),
-    WorkoutSection(1, "chest","Target your chest fat with high intensity workout. No embarrassing man boobs when taking T-shirt off", R.mipmap.chest ),
-    WorkoutSection(2, "Arm and shoulders","Get stronger arms and wider shoulders with targeted workouts. Suitable for all fitness levels", R.mipmap.biceps ),
-    WorkoutSection(3, "Legs","The best workouts for a stronger lower body. Gain muscle mass and increase strength", R.mipmap.legs ),
-    WorkoutSection(4, "Abs","Combined ABS workout with HIIT, you can melt away excess fat fast and make your six-pack visible easily", R.mipmap.abs ),
-    WorkoutSection(5, "Back","Strengthen and mobilize your lower back. Relax back muscles and prevent back injuries", R.mipmap.back ),
-)
-        workoutSectionAdapter = WorkoutSectionAdapter(requireContext(), workoutSectionArrayList)
+        workoutSectionViewModel.workoutSectionsLiveData.observe(
+            viewLifecycleOwner,
+            Observer { workoutSections ->
+                workoutSections?.let {
+                    workoutSectionArrayList=it
+                    workoutSectionAdapter.update(it)
+                }
+            }
+        )
+
+        workoutSectionAdapter = WorkoutSectionAdapter(requireContext(), null)
 
         binding.workoutSectionsRecycler.adapter = workoutSectionAdapter
         binding.workoutSectionsRecycler.layoutManager = LinearLayoutManager(requireContext())
 
         workoutSectionAdapter.setOnItemClickListener {
-            findNavController().navigate(R.id.action_workout_section_to_workout_list)
+            var bundle = Bundle()
+            bundle.putSerializable(WORKOUT_SECTION_ID, workoutSectionArrayList?.get(it))
+            findNavController().navigate(R.id.action_workout_section_to_workout_list,bundle)
         }
     }
     companion object {

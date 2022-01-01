@@ -2,37 +2,20 @@ package com.fakhour.workoutin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
+import com.fakhour.workoutin.workout.workout_sections.WorkoutSectionViewModel
 import com.rbddevs.splashy.Splashy
 
 class MainActivity : AppCompatActivity() {
+    private val mainActivityViewModel: MainActivityViewModel by lazy {
+        ViewModelProvider(this).get(MainActivityViewModel::class.java)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setSplashy()
-/*
-        val currentFragment =
-            supportFragmentManager.findFragmentById(R.id.fragment_container)
-
-        if (currentFragment == null) {
-            val fragment = WorkoutSectionFragment.newInstance()
-            supportFragmentManager
-                .beginTransaction()
-                .add(R.id.fragment_container, fragment)
-                .commit()
-        }
- */   }
-
-    fun setSplashy(){
-        Splashy(this)
-            .setLogo(R.drawable.ic_logo)
-            .setTitle("WorkoutIN")
-            .setTitleColor("#FFFFFF")
-            .setSubTitle("Home workout made easy")
-            .setProgressColor(R.color.white)
-            .setBackgroundResource(R.mipmap.background)
-            .setFullScreen(true)
-            .setDuration(2000)
-            .show()
+        mainActivityViewModel.setSplashy(this)
     }
+
+
 }

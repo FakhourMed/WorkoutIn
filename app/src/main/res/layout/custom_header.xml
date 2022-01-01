@@ -4,7 +4,7 @@
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:background="@color/background_card_color"
+    android:background="@color/header_background"
     android:orientation="vertical">
 
 
@@ -23,18 +23,21 @@ android:rotation="-90"
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="2"
+        android:textStyle="bold"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:textColor="@color/black"
         custom:autoSizeMaxTextSize="14sp"
         custom:autoSizeMinTextSize="10sp"
         custom:autoSizeTextType="uniform"
+        custom:layout_constraintBottom_toBottomOf="parent"
         custom:layout_constraintEnd_toEndOf="parent"
-        custom:layout_constraintStart_toEndOf="@+id/btnBack"
+        custom:layout_constraintStart_toStartOf="parent"
+        custom:layout_constraintTop_toTopOf="parent"
         tool:text="Header" />
 
 

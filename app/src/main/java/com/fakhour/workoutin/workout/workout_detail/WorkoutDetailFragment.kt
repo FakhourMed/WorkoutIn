@@ -10,7 +10,13 @@ import com.fakhour.workoutin.databinding.FragmentWorkoutDetailBinding
 import com.fakhour.workoutin.workout.entities.Workout
 
 import android.os.CountDownTimer
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.denzcoskun.imageslider.models.SlideModel
+import com.fakhour.workoutin.workout.entities.WorkoutSection
+import com.fakhour.workoutin.workout.workout_list.WORKOUT_ID
+import com.fakhour.workoutin.workout.workout_list.WorkoutListViewModel
+import com.fakhour.workoutin.workout.workout_sections.WORKOUT_SECTION_ID
 
 
 class WorkoutDetailFragment : Fragment() {
@@ -20,6 +26,11 @@ class WorkoutDetailFragment : Fragment() {
     private val STARTED_STATUS = 1
     private val FINISHED_STATUS = 2
 
+    var workout: Workout? = null
+
+    private val workoutDetailViewModel: WorkoutDetailViewModel by lazy {
+        ViewModelProvider(this).get(WorkoutDetailViewModel::class.java)
+    }
 
     private var status = NOT_STARTED_STATUS
 
@@ -34,6 +45,14 @@ class WorkoutDetailFragment : Fragment() {
 
     var workoutArrayList: ArrayList<Workout>? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        workout = arguments?.getSerializable(WORKOUT_ID) as Workout?
+
+        workout?.let {
+            workoutDetailViewModel.loadWorkout(it.id)
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentWorkoutDetailBinding.inflate(inflater, container, false)
@@ -46,19 +65,23 @@ class WorkoutDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        workoutArrayList = arrayListOf(
-            Workout(0, "Alternate Heel Touches", "description", R.mipmap.workout_img232),
-            Workout(1, "Abdominal Hip Roll", "description", R.mipmap.workout_img3924),
-            Workout(2, "Alternating Arm Cobra", "description", R.mipmap.workout_img2504),
-            Workout(3, "Arm Circles", "description", R.mipmap.workout_img3468),
-            Workout(4, "Ankle Circles", "description", R.mipmap.workout_img1156),
-            Workout(5, "Back Relaxation", "description", R.mipmap.workout_img2176),
-            Workout(6, "Alternating Reach and Catch", "description", R.mipmap.workout_img3872),
-            Workout(7, "All Fours Squad Stretch", "description", R.mipmap.workout_img1856),
-            Workout(8, "Assisted Chest Stretch", "description", R.mipmap.workout_img3340),
-            Workout(9, "Abdominal Pendulum", "description", R.mipmap.workout_img3868)
-        )
+        workout = arguments?.getSerializable(WORKOUT_ID) as Workout?
 
+        workout?.let {
+            workoutDetailViewModel.loadWorkout(it.id)
+        }
+
+        workoutDetailViewModel.workoutLiveData.observe(
+            viewLifecycleOwner,
+            Observer { workout ->
+                workout?.let {
+                    _binding?.workoutImg?.setImageList(arrayListOf(SlideModel(workout.firstImg)))
+                    _binding?.workoutTitle?.text = workout.title
+                    _binding?.workoutDescription?.text = workout.description
+                    _binding?.workoutTitleSmall?.text = workout.title
+
+                }
+            })
         setCountDown(startTime, interval)
 
         _binding?.countDownView?.setOnClickListener {
@@ -69,9 +92,9 @@ class WorkoutDetailFragment : Fragment() {
             startPauseLogic()
         }
 
-        imageList.add(SlideModel(R.mipmap.workout_img232))
-        imageList.add(SlideModel(R.mipmap.workout_img233))
-        _binding?.workoutImg?.setImageList(imageList)
+      //  imageList.add(SlideModel(R.mipmap.workout_img232))
+      //  imageList.add(SlideModel(R.mipmap.workout_img233))
+     // _binding?.workoutImg?.setImageList(imageList)
 
 
     }
@@ -80,11 +103,11 @@ class WorkoutDetailFragment : Fragment() {
         if (status == NOT_STARTED_STATUS) {
             countDownTimer?.start()
             status = STARTED_STATUS
-            _binding?.btnStart?.setText(R.string.pause)
         } else if (status == STARTED_STATUS) {
             countDownTimer?.cancel()
             setCountDown(currentTime, interval)
             status = NOT_STARTED_STATUS
+            _binding?.countDownView?.setText(getString(R.string.paused))
             _binding?.btnStart?.setText(R.string.start)
         } else {
             _binding?.countDownView?.setProgress(30)
@@ -111,12 +134,10 @@ class WorkoutDetailFragment : Fragment() {
     }
 
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 
 
     companion object {

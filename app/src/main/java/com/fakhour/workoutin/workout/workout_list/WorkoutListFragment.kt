@@ -1,23 +1,37 @@
 package com.fakhour.workoutin.workout.workout_list
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fakhour.workoutin.R
 import com.fakhour.workoutin.databinding.FragmentWorkoutListBinding
 import com.fakhour.workoutin.workout.entities.Workout
+import com.fakhour.workoutin.workout.entities.WorkoutSection
+import com.fakhour.workoutin.workout.workout_sections.WORKOUT_SECTION_ID
+import java.util.*
+import kotlin.collections.ArrayList
+
+const val WORKOUT_ID = "package com.fakhour.workoutin.workout.workout_list.WORKOUT_SECTION_ID"
 
 class WorkoutListFragment : Fragment() {
 
     private var _binding: FragmentWorkoutListBinding? = null
     private val binding get() = _binding!!
 
+    private val workoutListViewModel: WorkoutListViewModel by lazy {
+        ViewModelProvider(this).get(WorkoutListViewModel::class.java)
+    }
+
     private lateinit var workoutListAdapter: WorkoutListAdapter
     var workoutArrayList: ArrayList<Workout>? = null
+    var workoutSection: WorkoutSection? = null
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -29,29 +43,35 @@ class WorkoutListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        workoutArrayList = arrayListOf(
-          Workout(0,"Alternate Heel Touches", "description", R.mipmap.workout_img232 )  ,
-          Workout(1,"Abdominal Hip Roll", "description", R.mipmap.workout_img3924 )  ,
-          Workout(2,"Alternating Arm Cobra", "description", R.mipmap.workout_img2504 )  ,
-          Workout(3,"Arm Circles", "description", R.mipmap.workout_img3468 )  ,
-          Workout(4,"Ankle Circles", "description", R.mipmap.workout_img1156 )  ,
-          Workout(5,"Back Relaxation", "description", R.mipmap.workout_img2176 )  ,
-          Workout(6,"Alternating Reach and Catch", "description", R.mipmap.workout_img3872 )  ,
-          Workout(7,"All Fours Squad Stretch", "description", R.mipmap.workout_img1856)  ,
-          Workout(8,"Assisted Chest Stretch", "description", R.mipmap.workout_img3340 )  ,
-          Workout(9,"Abdominal Pendulum", "description", R.mipmap.workout_img3868 )
-        )
-        workoutListAdapter = WorkoutListAdapter(requireContext(), workoutArrayList)
+        workoutListAdapter = WorkoutListAdapter(requireContext(), null)
+
+        workoutSection= arguments?.getSerializable(WORKOUT_SECTION_ID) as WorkoutSection
+
+        workoutSection?.let {
+            workoutListViewModel.loadWorkoutList(it.id)
+        }
+
+        workoutListViewModel.workoutListLiveData.observe(
+            viewLifecycleOwner,
+            Observer { workout ->
+                workout?.let {
+                    workoutArrayList=it
+                    workoutListAdapter.update(it)
+                }
+            })
+
 
         binding.workoutSectionsRecycler.adapter = workoutListAdapter
         binding.workoutSectionsRecycler.layoutManager = LinearLayoutManager(requireContext())
 
-        binding.sectionSummaryLayout.sectionTitle.text="Full Body"
-        binding.sectionSummaryLayout.sectionDescription.text="A full-body workouts designed to challenge every muscle in your body. All you need is your body and a few feet of floor space, but you'll definitely feel like you've accomplished something"
+        binding.sectionSummaryLayout.sectionTitle.text=workoutSection?.sectionTitle
+        binding.sectionSummaryLayout.sectionDescription.text=workoutSection?.sectionDescription
+        binding.sectionSummaryLayout.imageView.setImageResource(workoutSection?.sectionImage?:-1)
 
         workoutListAdapter.setOnItemClickListener {
-
-            findNavController().navigate(R.id.action_workout_list_to_workout_detail)
+            var bundle = Bundle()
+            bundle.putSerializable(WORKOUT_ID, workoutArrayList?.get(it))
+            findNavController().navigate(R.id.action_workout_list_to_workout_detail, bundle)
 
         }
     }

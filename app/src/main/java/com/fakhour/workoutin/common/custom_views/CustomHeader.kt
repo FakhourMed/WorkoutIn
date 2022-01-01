@@ -1,11 +1,10 @@
-package com.fakhour.workoutin.workout.custom_views
+package com.fakhour.workoutin.common.custom_views
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import androidx.navigation.findNavController
-import com.fakhour.workoutin.MainActivity
 import com.fakhour.workoutin.R
 import com.fakhour.workoutin.databinding.CustomHeaderBinding
 
