@@ -51,7 +51,9 @@ class WorkoutSectionFragment : Fragment() {
                 }
             }
         )
-
+        binding.runningLayout.startRunBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_workout_section_to_running)
+        }
 
         workoutSectionAdapter = WorkoutSectionAdapter(requireContext(), null)
 

@@ -2,15 +2,15 @@ package com.fakhour.workoutin.common.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
-import com.fakhour.workoutin.R
+import com.fakhour.workoutin.common.api.RetrofitInstance
 import com.fakhour.workoutin.common.database.WorkoutDatabase
+import com.fakhour.workoutin.workout.entities.Athlete
+import com.fakhour.workoutin.workout.entities.RunActivity
 import com.fakhour.workoutin.workout.entities.Workout
 import com.fakhour.workoutin.workout.entities.WorkoutSection
 import java.util.*
 import java.util.concurrent.Executors
-import kotlin.collections.ArrayList
 
 private const val DATABASE_NAME = "workout-database"
 
@@ -129,6 +129,31 @@ class WorkoutRepository private constructor(context: Context) {
         executor.execute {
             workoutDao.deletteAllWorkouts()
         }
+    }
+
+    suspend fun getAthlete(): Athlete? {
+        val response = RetrofitInstance.api.getAthletes()
+        return if (response.body() != null) {
+            Mapper.toAthleteObject(response.body())
+        } else
+            null
+
+    }
+
+    suspend fun createRunningActivity(name: String, type: String, start_date_local: Date, elapsed_time: Int, description: String, distance: Float): RunActivity? {
+        val response = RetrofitInstance.api.createActivity(name, type, start_date_local, elapsed_time, description, distance)
+        return if (response.body() != null) {
+            Mapper.toRunningActivityObject(response.body()!!)
+        } else
+            null
+    }
+
+    suspend fun getRunningActivity(id: Long): RunActivity? {
+        val response = RetrofitInstance.api.getRunningActivity(id)
+        return if (response.body() != null) {
+            Mapper.toRunningActivityObject(response.body()!!)
+        } else
+            null
     }
 
 
