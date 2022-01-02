@@ -2,6 +2,9 @@ package com.fakhour.workoutin
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.fakhour.workoutin.workout.workout_list.WorkoutListViewModel
+import com.fakhour.workoutin.workout.workout_sections.WorkoutSectionViewModel
 import com.rbddevs.splashy.Splashy
 
 const val IS_SPLASH_SCREEN_DISPLAYED = "package com.fakhour.workoutin.IS_SPLASH_SCREEN_DISPLAYED"
@@ -9,6 +12,17 @@ var isSplashScreenDisplayed = false
 
 class MainActivity : AppCompatActivity() {
 
+    private val mainActivityViewModel: MainActivityViewModel by lazy {
+        ViewModelProvider(this).get(MainActivityViewModel::class.java)
+    }
+
+    private val workoutSectionViewModel: WorkoutSectionViewModel by lazy {
+        ViewModelProvider(this).get(WorkoutSectionViewModel::class.java)
+    }
+
+    private val workoutListViewModel: WorkoutListViewModel by lazy {
+        ViewModelProvider(this).get(WorkoutListViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         setContentView(R.layout.activity_main)
-
+mainActivityViewModel.populateDatabase(workoutSectionViewModel, workoutListViewModel)
 
     }
 

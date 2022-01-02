@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.denzcoskun.imageslider.models.SlideModel
 import com.fakhour.workoutin.workout.entities.WorkoutSection
+import com.fakhour.workoutin.workout.workout_list.START_WORKOUT
 import com.fakhour.workoutin.workout.workout_list.WORKOUT_ID
 import com.fakhour.workoutin.workout.workout_list.WorkoutListViewModel
 import com.fakhour.workoutin.workout.workout_sections.WORKOUT_SECTION_ID
@@ -27,6 +28,7 @@ class WorkoutDetailFragment : Fragment() {
     private val FINISHED_STATUS = 2
 
     var workout: Workout? = null
+    var startWorkout: Boolean? = null
 
     private val workoutDetailViewModel: WorkoutDetailViewModel by lazy {
         ViewModelProvider(this).get(WorkoutDetailViewModel::class.java)
@@ -45,14 +47,6 @@ class WorkoutDetailFragment : Fragment() {
 
     var workoutArrayList: ArrayList<Workout>? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        workout = arguments?.getSerializable(WORKOUT_ID) as Workout?
-
-        workout?.let {
-            workoutDetailViewModel.loadWorkout(it.id)
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentWorkoutDetailBinding.inflate(inflater, container, false)
@@ -64,8 +58,13 @@ class WorkoutDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (arguments?.getSerializable(WORKOUT_ID) != null) {
+            workout = arguments?.getSerializable(WORKOUT_ID) as Workout?
+        }
 
-        workout = arguments?.getSerializable(WORKOUT_ID) as Workout?
+        if (arguments?.getBoolean(START_WORKOUT) != null) {
+            startWorkout = arguments?.getBoolean(START_WORKOUT)
+        }
 
         workout?.let {
             workoutDetailViewModel.loadWorkout(it.id)
@@ -80,6 +79,10 @@ class WorkoutDetailFragment : Fragment() {
                     _binding?.workoutDescription?.text = workout.description
                     _binding?.workoutTitleSmall?.text = workout.title
 
+                    if(startWorkout==true){
+                        startPauseLogic()
+                    }
+
                 }
             })
         setCountDown(startTime, interval)
@@ -92,9 +95,9 @@ class WorkoutDetailFragment : Fragment() {
             startPauseLogic()
         }
 
-      //  imageList.add(SlideModel(R.mipmap.workout_img232))
-      //  imageList.add(SlideModel(R.mipmap.workout_img233))
-     // _binding?.workoutImg?.setImageList(imageList)
+        //  imageList.add(SlideModel(R.mipmap.workout_img232))
+        //  imageList.add(SlideModel(R.mipmap.workout_img233))
+        // _binding?.workoutImg?.setImageList(imageList)
 
 
     }

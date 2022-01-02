@@ -13,15 +13,23 @@ import kotlin.collections.ArrayList
 class WorkoutListViewModel:ViewModel() {
 
     private val workoutRepository = WorkoutRepository.get()
-    private val workoutSectionIdLiveData = MutableLiveData<UUID>()
+    private val workoutSectionIdLiveData = MutableLiveData<String>()
 
-    val workoutListLiveData: LiveData<ArrayList<Workout>> =
+    val workoutListLiveData: LiveData<List<Workout>> =
         Transformations.switchMap(workoutSectionIdLiveData) { workoutSectionId ->
-            workoutRepository.getWorkoutList(workoutSectionId)
+            workoutRepository.getSectionWorkouts(workoutSectionId)
         }
 
-    fun loadWorkoutList(workoutSectionId: UUID) {
+    fun loadWorkoutList(workoutSectionId: String) {
         workoutSectionIdLiveData.value = workoutSectionId
+    }
+
+    fun addWorkoutDetail(workoutDetail: Workout) {
+        workoutRepository.addWorkoutDetail(workoutDetail)
+    }
+
+    fun deleteAllWorkouts(){
+        workoutRepository.deleteAllWorkouts()
     }
 
 

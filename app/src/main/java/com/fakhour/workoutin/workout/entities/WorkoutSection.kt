@@ -1,13 +1,15 @@
 package com.fakhour.workoutin.workout.entities
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 import java.util.*
 import kotlin.collections.ArrayList
 
+@Entity
 data class WorkoutSection(
-    val id: UUID = UUID.randomUUID(),
+    @PrimaryKey val id: String,
     val sectionTitle: String,
     val sectionDescription: String,
     val sectionImage: Int,
-    val workout: ArrayList<Workout>? = null,
 ):Serializable

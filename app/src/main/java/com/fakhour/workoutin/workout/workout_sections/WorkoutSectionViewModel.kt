@@ -13,4 +13,8 @@ class WorkoutSectionViewModel:ViewModel() {
         workoutRepository.addWorkoutSection(workoutSection)
     }
 
+    fun deleteAllSections(){
+        workoutRepository.deletteAllSections()
+    }
+
 }

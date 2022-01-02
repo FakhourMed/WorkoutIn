@@ -31,7 +31,7 @@ class WorkoutListAdapter(val mContext: Context, var workoutList: ArrayList<Worko
             val itemHolder = holder as ItemViewHolder
 
             itemHolder.itemTitle.text=workout.title
-            itemHolder.itemRepetition.text=workout.duration
+            itemHolder.itemRepetition.text="30 Sec"
             itemHolder.itemImage.setImageResource(workout.firstImg)
 
 
@@ -46,9 +46,9 @@ class WorkoutListAdapter(val mContext: Context, var workoutList: ArrayList<Worko
         return workoutList?.size ?: 0
     }
 
-    fun update(_workoutList: ArrayList<Workout>?) {
+    fun update(_workoutList: List<Workout>?) {
 
-        this.workoutList = _workoutList
+        this.workoutList = ArrayList(_workoutList)
 
         notifyDataSetChanged()
     }

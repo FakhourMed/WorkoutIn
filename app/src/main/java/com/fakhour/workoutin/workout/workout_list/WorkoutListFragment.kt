@@ -18,6 +18,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 const val WORKOUT_ID = "package com.fakhour.workoutin.workout.workout_list.WORKOUT_SECTION_ID"
+const val START_WORKOUT = "package com.fakhour.workoutin.workout.workout_list.START_WORKOUT"
 
 class WorkoutListFragment : Fragment() {
 
@@ -55,11 +56,18 @@ class WorkoutListFragment : Fragment() {
             viewLifecycleOwner,
             Observer { workout ->
                 workout?.let {
-                    workoutArrayList=it
+                    workoutArrayList= ArrayList<Workout>(it)
                     workoutListAdapter.update(it)
                 }
             })
 
+binding.sectionSummaryLayout.startBtn.setOnClickListener {
+    var bundle = Bundle()
+    bundle.putSerializable(WORKOUT_ID, workoutArrayList?.get(0))
+    bundle.putBoolean(START_WORKOUT, true)
+    findNavController().navigate(R.id.action_workout_list_to_workout_detail, bundle)
+
+}
 
         binding.workoutSectionsRecycler.adapter = workoutListAdapter
         binding.workoutSectionsRecycler.layoutManager = LinearLayoutManager(requireContext())

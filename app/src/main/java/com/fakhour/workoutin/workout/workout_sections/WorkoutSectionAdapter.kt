@@ -45,9 +45,9 @@ class WorkoutSectionAdapter(val mContext: Context, var workoutSectionList: Array
         return workoutSectionList?.size ?: 0
     }
 
-    fun update(_workoutSectionList: ArrayList<WorkoutSection>?) {
+    fun update(_workoutSectionList: List<WorkoutSection>?) {
 
-        this.workoutSectionList = _workoutSectionList
+        this.workoutSectionList = ArrayList(_workoutSectionList)
 
         notifyDataSetChanged()
     }
