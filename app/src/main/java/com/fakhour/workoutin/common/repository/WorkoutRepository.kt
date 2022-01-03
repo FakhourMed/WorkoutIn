@@ -1,6 +1,7 @@
 package com.fakhour.workoutin.common.repository
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.Room
 import com.fakhour.workoutin.common.api.RetrofitInstance
@@ -9,6 +10,7 @@ import com.fakhour.workoutin.common.database.WorkoutDatabase
 import com.fakhour.workoutin.workout.entities.*
 import java.util.*
 import java.util.concurrent.Executors
+import kotlin.collections.ArrayList
 
 private const val DATABASE_NAME = "workout-database"
 const val APP_ID = "75995"
@@ -150,8 +152,9 @@ class WorkoutRepository private constructor(context: Context) {
             null
     }
 
-    suspend fun createRunningActivity(name: String, type: String, start_date_local: Date, elapsed_time: Int, description: String, distance: Float): RunActivity? {
-        val response = RetrofitInstance.api.createActivity(name, type, start_date_local, elapsed_time, description, distance)
+    suspend fun createRunningActivity(name: String, type: ActivityType, start_date_local: String, elapsed_time: Int, description: String, distance: Float): RunActivity? {
+        val response = RetrofitInstance.api.createActivity(name, type.name, start_date_local, elapsed_time, description, distance)
+        Log.d("TAG", "createRunningActivity: ")
         return if (response.body() != null) {
             Mapper.toRunningActivityObject(response.body()!!)
         } else
@@ -160,8 +163,19 @@ class WorkoutRepository private constructor(context: Context) {
 
     suspend fun getRunningActivity(id: Long): RunActivity? {
         val response = RetrofitInstance.api.getRunningActivity(id)
+        Log.d("TAG", "getRunningActivity: ")
         return if (response.body() != null) {
             Mapper.toRunningActivityObject(response.body()!!)
+        } else
+            null
+
+    }
+
+    suspend fun getAthleteActivities():ArrayList<RunActivity>? {
+        val response = RetrofitInstance.api.getAthleteActivities()
+        Log.d("TAG", "getAthleteActivities: ")
+        return if (response.body() != null) {
+            Mapper.toAthleteActivities(response.body()!!)
         } else
             null
     }

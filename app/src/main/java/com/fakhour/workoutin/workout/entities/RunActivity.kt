@@ -12,7 +12,7 @@ data class RunActivity(
     @SerializedName("elapsed_time")
     val elapsedTime: Int?,
     @SerializedName("total_elevation_gain")
-    val type: String?,
+    val type: ActivityType?,
     @SerializedName("start_date")
     val startDate: String?,
     @SerializedName("workout_type")
@@ -20,4 +20,8 @@ data class RunActivity(
     val description: String?,
     val calories: Double?,
 
-)
+    )
+
+enum class ActivityType {
+    RUN, WALK, RIDE, SWIM
+}

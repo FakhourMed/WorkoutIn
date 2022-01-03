@@ -5,18 +5,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fakhour.workoutin.common.api.authentication.FIRST_GRANT_TYPE
 import com.fakhour.workoutin.common.repository.WorkoutRepository
+import com.fakhour.workoutin.workout.entities.ActivityType
 import com.fakhour.workoutin.workout.entities.Athlete
 import com.fakhour.workoutin.workout.entities.RunActivity
 import com.fakhour.workoutin.workout.entities.RunningToken
 import kotlinx.coroutines.launch
 import java.util.*
+import kotlin.collections.ArrayList
 
 class RunningViewModel: ViewModel()  {
     private val workoutRepository = WorkoutRepository.get()
     val myResponseAthlete: MutableLiveData<Athlete?> = MutableLiveData()
-    val myResponseRunActivityPost: MutableLiveData<RunActivity?> = MutableLiveData()
-    val myResponseRunActivity: MutableLiveData<RunActivity?> = MutableLiveData()
+    val myResponseGetRunActivity: MutableLiveData<RunActivity?> = MutableLiveData()
+    val myResponseCreateRunActivity: MutableLiveData<RunActivity?> = MutableLiveData()
     val myResponseToken: MutableLiveData<RunningToken?> = MutableLiveData()
+    val myResponseAthleteActivities: MutableLiveData<ArrayList<RunActivity>?> = MutableLiveData()
+
 
     fun getAthletes() {
         viewModelScope.launch {
@@ -25,17 +29,27 @@ class RunningViewModel: ViewModel()  {
         }
     }
 
-    fun createActivity(name: String, type: String, start_date_local: Date, elapsed_time: Int, description: String, distance: Float){
+    fun createActivity(name: String, type: ActivityType, start_date_local: String, elapsed_time: Int, description: String, distance: Float){
         viewModelScope.launch {
             val response =workoutRepository.createRunningActivity(name,type,start_date_local,elapsed_time,description,distance)
-            myResponseRunActivityPost.value = response
+            myResponseCreateRunActivity.value = response
         }
     }
+
+
 
     fun getRunningActivity(id:Long) {
         viewModelScope.launch {
             val response = workoutRepository.getRunningActivity(id)
-            myResponseRunActivity.value = response
+            myResponseGetRunActivity.value = response
+        }
+    }
+
+
+    fun getAthleteActivities() {
+        viewModelScope.launch {
+        val response = workoutRepository.getAthleteActivities()
+            myResponseAthleteActivities.value = response
         }
     }
 

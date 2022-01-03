@@ -44,6 +44,29 @@ object Mapper {
             )
     }
 
+
+    fun toAthleteActivities(response: ArrayList<RunActivity>): ArrayList<RunActivity>? {
+        val array:ArrayList<RunActivity> = arrayListOf()
+        if (response == null) return null
+        else {
+            response.forEach { response->
+                array.add(RunActivity(
+                    id = response.id,
+                    name = response.name,
+                    distance = response.distance,
+                    movingTime = response.movingTime,
+                    elapsedTime = response.elapsedTime,
+                    type = response.type,
+                    startDate = response.startDate,
+                    workoutType = response.workoutType,
+                    description = response.description,
+                    calories = response.calories
+                ))
+            }
+            return array
+        }
+    }
+
     fun toTokenObject(response: RunningToken):RunningToken?{
         if (response == null) return null
         else

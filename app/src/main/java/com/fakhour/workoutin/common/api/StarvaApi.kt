@@ -10,6 +10,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 import java.util.*
+import kotlin.collections.ArrayList
 
 interface StarvaApi {
 
@@ -22,7 +23,7 @@ interface StarvaApi {
     suspend fun createActivity(
         @Query("name") name: String,
         @Query("type") type: String,
-        @Query("start_date_local") start_date_local: Date,
+        @Query("start_date_local") start_date_local: String,
         @Query("elapsed_time") elapsed_time: Int,
         @Query("description") description: String,
         @Query("distance") distance: Float
@@ -30,6 +31,9 @@ interface StarvaApi {
 
     @GET("activities/{id}")
     suspend fun getRunningActivity(@Path("id") id: Long): Response<RunActivity>
+
+    @GET("athlete/activities")
+    suspend fun getAthleteActivities(): Response<ArrayList<RunActivity>>
 
 /*
     @GET("todos")

@@ -15,6 +15,7 @@
     <string name="elapsed_time">Elapsed Time</string>
     <string name="description">Description</string>
     <string name="distance">Distance</string>
-    <string name="get_running_activity">Get Running Activity</string>
+    <string name="get_running_activity">Get random Running Activity</string>
+    <string name="get_athlete_activities">Get Athlete Activities</string>
 
 </resources>

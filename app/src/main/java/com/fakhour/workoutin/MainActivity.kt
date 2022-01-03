@@ -7,8 +7,11 @@ import com.fakhour.workoutin.workout.workout_list.WorkoutListViewModel
 import com.fakhour.workoutin.workout.workout_sections.WorkoutSectionViewModel
 import com.rbddevs.splashy.Splashy
 import android.net.Uri
+import android.preference.PreferenceManager
 import androidx.navigation.findNavController
+import com.fakhour.workoutin.common.api.RetrofitInstance
 import com.fakhour.workoutin.workout.running.RunningFragment
+import com.fakhour.workoutin.workout.running.TOKEN
 import java.net.URLDecoder
 
 import java.util.LinkedList
@@ -46,6 +49,15 @@ class MainActivity : AppCompatActivity() {
         ) {
             //setSplashy()
         }
+        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+
+        if(preferences.getString(TOKEN,null)!=null){
+            RetrofitInstance.token=preferences.getString(TOKEN,null)
+        }
+
+        setContentView(R.layout.activity_main)
+        mainActivityViewModel.populateDatabase(workoutSectionViewModel, workoutListViewModel)
+
 
         if (intent.data != null) {
             val data = intent.data
@@ -58,22 +70,11 @@ class MainActivity : AppCompatActivity() {
             bundle.putString(AUTHENTICATION_STATE, state)
             bundle.putString(AUTHENTICATION_CODE, code)
             bundle.putString(AUTHENTICATION_SCOPE, scope)
-/*
-            val fragment = RunningFragment()
-            fragment.arguments=bundle
 
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.my_nav_host_fragment, fragment)
-                .commit()
 
- */
-            //findNavController(R.id.my_nav_host_fragment).navigate(R.id.action_workout_section_to_running, bundle)
+            findNavController(R.id.my_nav_host_fragment).navigate(R.id.action_workout_section_to_running, bundle)
 
         }
-
-        setContentView(R.layout.activity_main)
-        mainActivityViewModel.populateDatabase(workoutSectionViewModel, workoutListViewModel)
 
     }
 

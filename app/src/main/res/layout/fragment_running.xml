@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -14,31 +20,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/content_to_hide"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="gone"
+        >
 
         <Button
             android:id="@+id/get_athlete_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="144dp"
+            android:layout_marginTop="24dp"
             android:text="@string/get_athlete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/athlete_weight" />
 
         <EditText
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/big_margin"
-            android:layout_marginTop="@dimen/big_margin"
+            android:layout_marginTop="16dp"
             android:hint="@string/name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/get_athlete_btn" />
@@ -57,7 +65,7 @@
             android:id="@+id/type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginTop="8dp"
             android:hint="@string/type"
             app:layout_constraintStart_toStartOf="@+id/name"
             app:layout_constraintTop_toBottomOf="@+id/name" />
@@ -66,7 +74,7 @@
             android:id="@+id/elapsed_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginTop="8dp"
             android:hint="@string/elapsed_time"
             app:layout_constraintStart_toStartOf="@+id/type"
             app:layout_constraintTop_toBottomOf="@+id/type" />
@@ -75,7 +83,7 @@
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginTop="8dp"
             android:hint="@string/description"
             app:layout_constraintStart_toStartOf="@+id/elapsed_time"
             app:layout_constraintTop_toBottomOf="@+id/elapsed_time" />
@@ -84,18 +92,19 @@
             android:id="@+id/distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginTop="8dp"
             android:hint="@string/distance"
             app:layout_constraintStart_toStartOf="@+id/description"
             app:layout_constraintTop_toBottomOf="@+id/description" />
 
+
         <Button
-            android:id="@+id/get_running_activity_btn"
+            android:id="@+id/get_athlete_activities_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:text="@string/get_running_activity"
+            android:text="@string/get_athlete_activities"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/create_activity_btn" />
 
@@ -103,9 +112,9 @@
             android:id="@+id/athlete_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/big_margin"
-            app:layout_constraintBottom_toTopOf="@+id/get_athlete_btn"
+            android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.13"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -122,18 +131,82 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/athlete_first_name"
             app:layout_constraintTop_toTopOf="@+id/athlete_first_name" />
 
         <TextView
             android:id="@+id/athlete_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/small_margin"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/athlete_first_name"
             app:layout_constraintTop_toBottomOf="@+id/athlete_first_name" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/random_activity"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/get_athlete_activities_btn">
+
+            <Button
+                android:id="@+id/get_running_activity_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/get_running_activity"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/run_activity_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Run Name:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/get_running_activity_btn" />
+
+            <TextView
+                android:id="@+id/run_activity_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="Type:"
+                app:layout_constraintStart_toEndOf="@+id/run_activity_name"
+                app:layout_constraintTop_toTopOf="@+id/run_activity_name" />
+
+            <TextView
+                android:id="@+id/run_activity_elapsed_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="ElapsedTime:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/run_activity_name" />
+
+            <TextView
+                android:id="@+id/run_activity_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="Description:"
+                app:layout_constraintStart_toEndOf="@+id/run_activity_elapsed_time"
+                app:layout_constraintTop_toBottomOf="@+id/run_activity_name" />
+
+            <TextView
+                android:id="@+id/run_activity_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Distance:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/run_activity_elapsed_time" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
