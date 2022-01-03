@@ -1,8 +1,5 @@
-package com.fakhour.workoutin.common.api
+package com.fakhour.workoutin.common.api.authentication
 
-import android.content.Context
-import com.google.gson.GsonBuilder
-import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -10,20 +7,18 @@ import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
-import java.util.concurrent.TimeUnit
 
 
-const val  BASE_URL="https://www.strava.com/api/v3/"
+const val  BASE_URL_AUTHENTICATOR="https://www.strava.com/oauth/"
+const val  FIRST_GRANT_TYPE="authorization_code"
 
-object RetrofitInstance {
+object RetrofitAuthenticatorInstance {
 
-    var token:String?=null
     private val retrofit by lazy {
         val client: OkHttpClient = OkHttpClient.Builder().addInterceptor(object : Interceptor {
             @Throws(IOException::class)
             override fun intercept(chain: Interceptor.Chain): Response {
                 val newRequest: Request = chain.request().newBuilder()
-                    .addHeader("Authorization", "Bearer $token")
                     .build()
                 return chain.proceed(newRequest)
             }
@@ -31,13 +26,13 @@ object RetrofitInstance {
 
       Retrofit.Builder()
             .client(client)
-            .baseUrl(BASE_URL)
+            .baseUrl(BASE_URL_AUTHENTICATOR)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
-    val api :StarvaApi by lazy{
-        retrofit.create(StarvaApi::class.java)
+    val apiAuthenticator :StarvaApiAuthenticator by lazy{
+        retrofit.create(StarvaApiAuthenticator::class.java)
     }
 
 }

@@ -6,16 +6,19 @@ import com.fakhour.workoutin.workout.entities.Athlete
 import com.fakhour.workoutin.workout.entities.RunActivity
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 import java.util.*
 
 interface StarvaApi {
 
+
+
     @GET("athlete")
     suspend fun getAthletes(): Response<Athlete>
 
-    @GET("activities")
+    @POST("activities")
     suspend fun createActivity(
         @Query("name") name: String,
         @Query("type") type: String,

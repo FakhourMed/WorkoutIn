@@ -3,9 +3,11 @@ package com.fakhour.workoutin.workout.running
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fakhour.workoutin.common.api.authentication.FIRST_GRANT_TYPE
 import com.fakhour.workoutin.common.repository.WorkoutRepository
 import com.fakhour.workoutin.workout.entities.Athlete
 import com.fakhour.workoutin.workout.entities.RunActivity
+import com.fakhour.workoutin.workout.entities.RunningToken
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -14,6 +16,7 @@ class RunningViewModel: ViewModel()  {
     val myResponseAthlete: MutableLiveData<Athlete?> = MutableLiveData()
     val myResponseRunActivityPost: MutableLiveData<RunActivity?> = MutableLiveData()
     val myResponseRunActivity: MutableLiveData<RunActivity?> = MutableLiveData()
+    val myResponseToken: MutableLiveData<RunningToken?> = MutableLiveData()
 
     fun getAthletes() {
         viewModelScope.launch {
@@ -33,6 +36,13 @@ class RunningViewModel: ViewModel()  {
         viewModelScope.launch {
             val response = workoutRepository.getRunningActivity(id)
             myResponseRunActivity.value = response
+        }
+    }
+
+    fun authenticateFirstTime(code:String){
+        viewModelScope.launch {
+            val response =workoutRepository.getToken(code, FIRST_GRANT_TYPE)
+            myResponseToken.value = response
         }
     }
 }

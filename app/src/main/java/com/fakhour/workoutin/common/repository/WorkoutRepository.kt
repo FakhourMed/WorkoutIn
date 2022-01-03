@@ -4,15 +4,16 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Room
 import com.fakhour.workoutin.common.api.RetrofitInstance
+import com.fakhour.workoutin.common.api.authentication.RetrofitAuthenticatorInstance
 import com.fakhour.workoutin.common.database.WorkoutDatabase
-import com.fakhour.workoutin.workout.entities.Athlete
-import com.fakhour.workoutin.workout.entities.RunActivity
-import com.fakhour.workoutin.workout.entities.Workout
-import com.fakhour.workoutin.workout.entities.WorkoutSection
+import com.fakhour.workoutin.workout.entities.*
 import java.util.*
 import java.util.concurrent.Executors
 
 private const val DATABASE_NAME = "workout-database"
+const val APP_ID = "75995"
+const val CLIENT_SECRET = "05ba47519b5e6951a423726e297a8ea7d482baad"
+
 
 
 class WorkoutRepository private constructor(context: Context) {
@@ -131,13 +132,22 @@ class WorkoutRepository private constructor(context: Context) {
         }
     }
 
+    suspend fun getToken(code:String, grantType:String): RunningToken? {
+        val response = RetrofitAuthenticatorInstance.apiAuthenticator.getToken(APP_ID, CLIENT_SECRET, code, grantType)
+        return if (response.body() != null) {
+            Mapper.toTokenObject(response.body()!!)
+        } else
+            null
+    }
+
+
+
     suspend fun getAthlete(): Athlete? {
         val response = RetrofitInstance.api.getAthletes()
         return if (response.body() != null) {
             Mapper.toAthleteObject(response.body())
         } else
             null
-
     }
 
     suspend fun createRunningActivity(name: String, type: String, start_date_local: Date, elapsed_time: Int, description: String, distance: Float): RunActivity? {

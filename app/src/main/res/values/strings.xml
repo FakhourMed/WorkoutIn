@@ -7,5 +7,14 @@
 
     <string name="running_title">Running</string>
     <string name="running_description">A joyfull investment in your body, mind and spirit.</string>
+    <string name="authentication">Authentication</string>
+    <string name="get_athlete">Get Athlete</string>
+    <string name="name">Name</string>
+    <string name="create_activity">Create Activity</string>
+    <string name="type">Type</string>
+    <string name="elapsed_time">Elapsed Time</string>
+    <string name="description">Description</string>
+    <string name="distance">Distance</string>
+    <string name="get_running_activity">Get Running Activity</string>
 
 </resources>
