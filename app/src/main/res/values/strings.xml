@@ -18,9 +18,9 @@
     <string name="distance">Distance</string>
     <string name="get_running_activity">Get random Running Activity</string>
     <string name="get_athlete_activities">Get Athlete Activities</string>
-    <string name="athlete_id">Athlete Id:</string>
-    <string name="athlete_firstname">Athlete firstname:</string>
-    <string name="athlete_lastname">Athlete lastname:</string>
-    <string name="athlete_weight">Athlete weight:</string>
+    <string name="athlete_id">Athlete Id: </string>
+    <string name="athlete_firstname">Athlete firstname: </string>
+    <string name="athlete_lastname">Athlete lastname: </string>
+    <string name="athlete_weight">Athlete weight: </string>
 
 </resources>

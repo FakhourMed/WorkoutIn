@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -28,18 +26,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/header"
+            android:visibility="gone"
 
             />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/content_to_hide"
             android:layout_width="match_parent"
-            android:visibility="gone"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/header"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_editor_absoluteX="0dp">
+           >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/running_layout"
@@ -122,6 +125,7 @@
                     <TextView
                         android:id="@+id/athlete_id"
                         android:layout_width="wrap_content"
+
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/medium_margin"
                         android:layout_marginTop="@dimen/small_margin"
@@ -147,26 +151,24 @@
                         android:id="@+id/athlete_last_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/medium_margin"
-
+                        android:layout_marginTop="@dimen/small_margin"
                         android:text="@string/athlete_lastname"
                         android:textSize="@dimen/small_text_size"
-
-                        app:layout_constraintStart_toEndOf="@+id/athlete_first_name"
-                        app:layout_constraintTop_toTopOf="@+id/athlete_first_name" />
+                        app:layout_constraintStart_toStartOf="@+id/athlete_first_name"
+                        app:layout_constraintTop_toBottomOf="@+id/athlete_first_name" />
 
                     <TextView
                         android:id="@+id/athlete_weight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:layout_marginTop="@dimen/small_margin"
+
                         android:layout_marginBottom="@dimen/small_margin"
                         android:text="@string/athlete_weight"
                         android:textSize="@dimen/small_text_size"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/athlete_first_name"
-                        app:layout_constraintTop_toBottomOf="@+id/athlete_first_name"
+                        app:layout_constraintTop_toBottomOf="@+id/athlete_last_name"
                         app:layout_constraintVertical_bias="0.0" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -221,7 +223,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/name">
 
 
-                        <EditText
+                        <TextView
                             android:id="@+id/type"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -264,7 +266,7 @@ android:layout_marginStart="@dimen/medium_margin"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/small_margin"
                         android:hint="@string/elapsed_time"
-                        android:inputType="numberPassword"
+                        android:inputType="numberDecimal"
                         android:textSize="@dimen/small_text_size"
 
                         app:layout_constraintStart_toEndOf="@+id/distance"
@@ -287,7 +289,7 @@ android:layout_marginBottom="@dimen/small_margin"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/small_margin"
                         android:hint="@string/distance"
-                        android:inputType="numberPassword"
+                        android:inputType="numberDecimal"
                         android:textSize="@dimen/small_text_size"
                         app:layout_constraintStart_toEndOf="@+id/name"
                         app:layout_constraintTop_toTopOf="@+id/name" />
@@ -342,6 +344,8 @@ android:layout_marginBottom="@dimen/small_margin"
                 android:layout_margin="@dimen/medium_margin"
                 android:backgroundTint="@color/background_card_color"
                 android:elevation="@dimen/card_elevation"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="@dimen/medium_margin"
                 app:cardCornerRadius="@dimen/card_radius"
                 app:layout_constraintTop_toBottomOf="@id/get_running_activity_btn">
 
@@ -397,6 +401,6 @@ android:layout_marginBottom="@dimen/small_margin"
                 </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>

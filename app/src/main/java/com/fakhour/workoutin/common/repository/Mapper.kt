@@ -1,7 +1,10 @@
 package com.fakhour.workoutin.common.repository
 
+import android.util.Log
+import com.fakhour.workoutin.workout.entities.ActivityType
 import com.fakhour.workoutin.workout.running.entities.Athlete
 import com.fakhour.workoutin.workout.entities.RunActivity
+import com.fakhour.workoutin.workout.entities.WorkoutTypeEnum
 import com.fakhour.workoutin.workout.running.entities.RunningToken
 
 object Mapper {
@@ -28,6 +31,7 @@ object Mapper {
     }
 
     fun toRunningActivityObject(response: RunActivity): RunActivity? {
+        Log.d("TAG", "toRunningActivityObject: ")
         if (response == null) return null
         else
             return RunActivity(
@@ -36,20 +40,26 @@ object Mapper {
                 distance = response.distance,
                 movingTime = response.movingTime,
                 elapsedTime = response.elapsedTime,
-                type = response.type,
+                typeEnum = when (response.type) {
+                    "Run" -> ActivityType.RUN
+                    "Walk" -> ActivityType.WALK
+                    "Ride" -> ActivityType.RIDE
+                    else -> ActivityType.RUN
+                },
                 startDate = response.startDate,
                 workoutType = response.workoutType,
                 description = response.description,
-                calories = response.calories
+                calories = response.calories,
+                type = response.type
             )
     }
 
 
     fun toAthleteActivities(response: ArrayList<RunActivity>): ArrayList<RunActivity>? {
-        val array:ArrayList<RunActivity> = arrayListOf()
+        val array: ArrayList<RunActivity> = arrayListOf()
         if (response == null) return null
         else {
-            response.forEach { response->
+            response.forEach { response ->
                 array.add(RunActivity(
                     id = response.id,
                     name = response.name,
@@ -60,14 +70,20 @@ object Mapper {
                     startDate = response.startDate,
                     workoutType = response.workoutType,
                     description = response.description,
-                    calories = response.calories
+                    calories = response.calories,
+                    typeEnum = when (response.type) {
+                        "Run" -> ActivityType.RUN
+                        "Walk" -> ActivityType.WALK
+                        "Ride" -> ActivityType.RIDE
+                        else -> ActivityType.RUN
+                    },
                 ))
             }
             return array
         }
     }
 
-    fun toTokenObject(response: RunningToken): RunningToken?{
+    fun toTokenObject(response: RunningToken): RunningToken? {
         if (response == null) return null
         else
             return RunningToken(accessToken = response.accessToken,

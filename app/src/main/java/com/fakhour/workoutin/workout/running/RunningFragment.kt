@@ -100,7 +100,7 @@ else->ActivityType.RUN
             runningViewModel.createActivity(_binding?.name?.text?.toString() ?: "",
                 activityType,
                 nowAsISO,
-                if (_binding?.elapsedTime?.text?.toString().isNullOrBlank()) 0 else _binding?.elapsedTime?.text?.toString()?.toInt() ?: 0,
+                if (_binding?.elapsedTime?.text?.toString().isNullOrBlank()) 0 else _binding?.elapsedTime?.text?.toString()?.toFloat()?.toInt() ?: 0,
                 _binding?.description?.text?.toString() ?: "",
                 if (_binding?.distance?.text?.toString().isNullOrBlank()) 0F else _binding?.distance?.text?.toString()?.toFloat() ?: 0F)
         }
@@ -133,15 +133,21 @@ else->ActivityType.RUN
         })
 
         runningViewModel.myResponseCreateRunActivity.observe(viewLifecycleOwner, Observer { runActivity ->
+            _binding?.name?.text?.clear()
+            _binding?.distance?.text?.clear()
+            _binding?.description?.text?.clear()
+            _binding?.elapsedTime?.text?.clear()
+            _binding?.radioRun?.isChecked=true
 
         })
 
         runningViewModel.myResponseGetRunActivity   .observe(viewLifecycleOwner, Observer { runActivity ->
             if (runActivity != null) {
                 _binding?.getRunningActivityBtn?.visibility=View.GONE
+                _binding?.randomActivityCard?.visibility=View.VISIBLE
 
                 _binding?.runActivityName?.text = getString(R.string.name)+": " + runActivity.name
-                _binding?.runActivityType?.text = getString(R.string.type)+": " + runActivity.type
+                _binding?.runActivityType?.text = getString(R.string.type)+": " + runActivity.typeEnum?.name
                 _binding?.runActivityElapsedTime?.text =  getString(R.string.elapsed_time)+": " + runActivity.elapsedTime
                 _binding?.runActivityDescription?.text =  getString(R.string.description)+": "+ runActivity.description
                 _binding?.runActivityDistance?.text =  getString(R.string.distance)+": " + runActivity.distance
@@ -151,6 +157,8 @@ else->ActivityType.RUN
         runningViewModel.myResponseAthleteActivities.observe(viewLifecycleOwner, Observer { athleteActivitiesList ->
             if (athleteActivitiesList != null) {
                 _binding?.randomActivity?.visibility=View.VISIBLE
+                _binding?.randomActivityCard?.visibility=View.GONE
+
                 _binding?.getRunningActivityBtn?.visibility=View.VISIBLE
 
                 val temp=getRandomNumber(0, athleteActivitiesList!!.size)
