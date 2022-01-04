@@ -12,9 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.fakhour.workoutin.R
 import com.fakhour.workoutin.databinding.FragmentWorkoutListBinding
 import com.fakhour.workoutin.workout.entities.Workout
-import com.fakhour.workoutin.workout.entities.WorkoutSection
+import com.fakhour.workoutin.workout.workout_sections.entities.WorkoutSection
 import com.fakhour.workoutin.workout.workout_sections.WORKOUT_SECTION_ID
-import java.util.*
 import kotlin.collections.ArrayList
 
 const val WORKOUT_ID = "package com.fakhour.workoutin.workout.workout_list.WORKOUT_SECTION_ID"

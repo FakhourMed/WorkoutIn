@@ -3,9 +3,9 @@ package com.fakhour.workoutin.common.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.fakhour.workoutin.workout.entities.ExerciceSession
+import com.fakhour.workoutin.workout.workout_list.entities.ExerciceSession
 import com.fakhour.workoutin.workout.entities.Workout
-import com.fakhour.workoutin.workout.entities.WorkoutSection
+import com.fakhour.workoutin.workout.workout_sections.entities.WorkoutSection
 
 @Database(entities = [ Workout::class, WorkoutSection::class, ExerciceSession::class ], version=1)
 @TypeConverters(WorkoutTypeConverters::class)

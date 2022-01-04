@@ -1,4 +1,4 @@
-package com.fakhour.workoutin.workout.entities
+package com.fakhour.workoutin.workout.running.entities
 
 import com.google.gson.annotations.SerializedName
 

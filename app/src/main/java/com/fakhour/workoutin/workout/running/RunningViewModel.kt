@@ -6,11 +6,10 @@ import androidx.lifecycle.viewModelScope
 import com.fakhour.workoutin.common.api.authentication.FIRST_GRANT_TYPE
 import com.fakhour.workoutin.common.repository.WorkoutRepository
 import com.fakhour.workoutin.workout.entities.ActivityType
-import com.fakhour.workoutin.workout.entities.Athlete
+import com.fakhour.workoutin.workout.running.entities.Athlete
 import com.fakhour.workoutin.workout.entities.RunActivity
-import com.fakhour.workoutin.workout.entities.RunningToken
+import com.fakhour.workoutin.workout.running.entities.RunningToken
 import kotlinx.coroutines.launch
-import java.util.*
 import kotlin.collections.ArrayList
 
 class RunningViewModel: ViewModel()  {

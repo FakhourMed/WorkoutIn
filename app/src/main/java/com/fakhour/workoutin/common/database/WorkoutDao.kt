@@ -2,10 +2,9 @@ package com.fakhour.workoutin.common.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.fakhour.workoutin.workout.entities.ExerciceSession
+import com.fakhour.workoutin.workout.workout_list.entities.ExerciceSession
 import com.fakhour.workoutin.workout.entities.Workout
-import com.fakhour.workoutin.workout.entities.WorkoutSection
-import java.util.*
+import com.fakhour.workoutin.workout.workout_sections.entities.WorkoutSection
 
 @Dao
 interface WorkoutDao {

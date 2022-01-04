@@ -1,4 +1,4 @@
-package com.fakhour.workoutin.workout.entities
+package com.fakhour.workoutin.workout.workout_sections.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

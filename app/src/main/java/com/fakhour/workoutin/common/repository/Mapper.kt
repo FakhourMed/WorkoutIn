@@ -1,8 +1,8 @@
 package com.fakhour.workoutin.common.repository
 
-import com.fakhour.workoutin.workout.entities.Athlete
+import com.fakhour.workoutin.workout.running.entities.Athlete
 import com.fakhour.workoutin.workout.entities.RunActivity
-import com.fakhour.workoutin.workout.entities.RunningToken
+import com.fakhour.workoutin.workout.running.entities.RunningToken
 
 object Mapper {
     fun toAthleteObject(response: Athlete?): Athlete? {
@@ -67,7 +67,7 @@ object Mapper {
         }
     }
 
-    fun toTokenObject(response: RunningToken):RunningToken?{
+    fun toTokenObject(response: RunningToken): RunningToken?{
         if (response == null) return null
         else
             return RunningToken(accessToken = response.accessToken,

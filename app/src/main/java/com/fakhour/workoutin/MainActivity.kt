@@ -1,5 +1,6 @@
 package com.fakhour.workoutin
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +26,8 @@ const val IS_SPLASH_SCREEN_DISPLAYED = "package com.fakhour.workoutin.IS_SPLASH_
 const val AUTHENTICATION_CODE = "package com.fakhour.workoutin.AUTHENTICATION_CODE"
 const val AUTHENTICATION_SCOPE = "package com.fakhour.workoutin.AUTHENTICATION_SCOPE"
 const val AUTHENTICATION_STATE = "package com.fakhour.workoutin.AUTHENTICATION_STATE"
+const val IS_DATABASE_FILLED = "package com.fakhour.workoutin.IS_DATABASE_FILLED"
+
 var isSplashScreenDisplayed = false
 
 class MainActivity : AppCompatActivity() {
@@ -43,22 +46,24 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (savedInstanceState?.getBoolean(IS_SPLASH_SCREEN_DISPLAYED) == false || savedInstanceState?.getBoolean(
-                IS_SPLASH_SCREEN_DISPLAYED
-            ) == null
-        ) {
-            //setSplashy()
-        }
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+
+
+        displaySplashScreen(savedInstanceState)
 
         if(preferences.getString(TOKEN,null)!=null){
             RetrofitInstance.token=preferences.getString(TOKEN,null)
         }
 
+        fillingDatabase(preferences)
+
         setContentView(R.layout.activity_main)
-        mainActivityViewModel.populateDatabase(workoutSectionViewModel, workoutListViewModel)
 
+        getStravaAuthorizationCode()
 
+    }
+
+    private fun getStravaAuthorizationCode() {
         if (intent.data != null) {
             val data = intent.data
 
@@ -75,7 +80,24 @@ class MainActivity : AppCompatActivity() {
             findNavController(R.id.my_nav_host_fragment).navigate(R.id.action_workout_section_to_running, bundle)
 
         }
+    }
 
+    private fun displaySplashScreen(savedInstanceState: Bundle?) {
+        if (savedInstanceState?.getBoolean(IS_SPLASH_SCREEN_DISPLAYED) == false || savedInstanceState?.getBoolean(
+                IS_SPLASH_SCREEN_DISPLAYED
+            ) == null
+        ) {
+            setSplashy()
+        }
+    }
+
+    private fun fillingDatabase(preferences: SharedPreferences) {
+        if (preferences.getBoolean(IS_DATABASE_FILLED, false) == false) {
+            mainActivityViewModel.populateDatabase(workoutSectionViewModel, workoutListViewModel)
+            val editor = preferences.edit()
+            editor.putBoolean(IS_DATABASE_FILLED, true)
+            editor.apply()
+        }
     }
 
     @Throws(UnsupportedEncodingException::class)

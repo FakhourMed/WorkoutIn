@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.fakhour.workoutin.databinding.WorkoutSectionItemBinding
-import com.fakhour.workoutin.workout.entities.WorkoutSection
+import com.fakhour.workoutin.workout.workout_sections.entities.WorkoutSection
 
 
 class WorkoutSectionAdapter(val mContext: Context, var workoutSectionList: ArrayList<WorkoutSection>?) :

@@ -2,7 +2,7 @@ package com.fakhour.workoutin.workout.workout_sections
 
 import androidx.lifecycle.ViewModel
 import com.fakhour.workoutin.common.repository.WorkoutRepository
-import com.fakhour.workoutin.workout.entities.WorkoutSection
+import com.fakhour.workoutin.workout.workout_sections.entities.WorkoutSection
 
 class WorkoutSectionViewModel:ViewModel() {
 

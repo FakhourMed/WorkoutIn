@@ -1,26 +1,26 @@
 package com.fakhour.workoutin
 
-import android.content.Intent
-import android.os.Bundle
+import android.preference.PreferenceManager
 import androidx.lifecycle.ViewModel
 import com.fakhour.workoutin.common.repository.WorkoutRepository
 import com.fakhour.workoutin.workout.entities.MuscleGroupEnum
 import com.fakhour.workoutin.workout.entities.Workout
-import com.fakhour.workoutin.workout.entities.WorkoutSection
+import com.fakhour.workoutin.workout.running.TOKEN
+import com.fakhour.workoutin.workout.workout_sections.entities.WorkoutSection
 import com.fakhour.workoutin.workout.workout_list.WorkoutListViewModel
 import com.fakhour.workoutin.workout.workout_sections.WorkoutSectionViewModel
-import java.util.*
 
 class MainActivityViewModel : ViewModel() {
 
     private val workoutRepository = WorkoutRepository.get()
-    val workoutSectionsLiveData = workoutRepository.getAllWorkoutSections()
 
     fun populateDatabase(workoutSectionViewModel: WorkoutSectionViewModel, workoutListViewModel: WorkoutListViewModel) {
+
 
         populateSections(workoutSectionViewModel)
 
         populateWorkout(workoutListViewModel)
+
 
     }
 

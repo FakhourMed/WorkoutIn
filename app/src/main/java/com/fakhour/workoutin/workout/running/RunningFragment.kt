@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.fakhour.workoutin.AUTHENTICATION_CODE
 import com.fakhour.workoutin.AUTHENTICATION_SCOPE
 import com.fakhour.workoutin.AUTHENTICATION_STATE
+import com.fakhour.workoutin.R
 import com.fakhour.workoutin.common.api.RetrofitInstance
 import com.fakhour.workoutin.common.repository.APP_ID
 import com.fakhour.workoutin.databinding.FragmentRunningBinding
@@ -88,8 +89,16 @@ class RunningFragment : Fragment() {
             df.setTimeZone(tz)
             val nowAsISO: String = df.format(Date())
 
+            val activityType=when(_binding?.typeRadioGroup?.checkedRadioButtonId){
+            R.id.radio_ride->ActivityType.RIDE
+            R.id.radio_run->ActivityType.RUN
+            R.id.radio_walk->ActivityType.WALK
+else->ActivityType.RUN
+
+            }
+
             runningViewModel.createActivity(_binding?.name?.text?.toString() ?: "",
-                ActivityType.RUN,
+                activityType,
                 nowAsISO,
                 if (_binding?.elapsedTime?.text?.toString().isNullOrBlank()) 0 else _binding?.elapsedTime?.text?.toString()?.toInt() ?: 0,
                 _binding?.description?.text?.toString() ?: "",
@@ -115,11 +124,10 @@ class RunningFragment : Fragment() {
 
         runningViewModel.myResponseAthlete.observe(viewLifecycleOwner, Observer { athlete ->
             if (athlete != null) {
-                _binding?.athleteId?.text = "athleteId: ${athlete.id}"
-                _binding?.athleteFirstName?.text = athlete.firstname
-                _binding?.athleteLastName?.text = athlete.lastname
-                _binding?.athleteWeight?.text = "Weight:" + athlete.weight.toString()
-                Log.d("TAG", "onViewCreated: ${athlete.firstname} ${athlete.lastname}, ${athlete.createdAt}")
+                _binding?.athleteId?.text =  getString(R.string.athlete_id)+ athlete.id
+                _binding?.athleteFirstName?.text =  getString(R.string.athlete_firstname)+athlete.firstname
+                _binding?.athleteLastName?.text =  getString(R.string.athlete_lastname)+athlete.lastname
+                _binding?.athleteWeight?.text =  getString(R.string.athlete_weight)+ athlete.weight.toString()
             }
 
         })
@@ -132,11 +140,11 @@ class RunningFragment : Fragment() {
             if (runActivity != null) {
                 _binding?.getRunningActivityBtn?.visibility=View.GONE
 
-                _binding?.runActivityName?.text = "Name: " + runActivity.name
-                _binding?.runActivityType?.text = "Type: " + runActivity.type
-                _binding?.runActivityElapsedTime?.text = "Elapsed Time: " + runActivity.elapsedTime
-                _binding?.runActivityDescription?.text = "Description: " + runActivity.description
-                _binding?.runActivityDistance?.text = "Distance: " + runActivity.distance
+                _binding?.runActivityName?.text = getString(R.string.name)+": " + runActivity.name
+                _binding?.runActivityType?.text = getString(R.string.type)+": " + runActivity.type
+                _binding?.runActivityElapsedTime?.text =  getString(R.string.elapsed_time)+": " + runActivity.elapsedTime
+                _binding?.runActivityDescription?.text =  getString(R.string.description)+": "+ runActivity.description
+                _binding?.runActivityDistance?.text =  getString(R.string.distance)+": " + runActivity.distance
             }
         })
 
@@ -147,7 +155,6 @@ class RunningFragment : Fragment() {
 
                 val temp=getRandomNumber(0, athleteActivitiesList!!.size)
                 randomId = athleteActivitiesList[temp].id
-                Log.d("TAG", "onViewCreated:"+randomId)
             }
         })
 

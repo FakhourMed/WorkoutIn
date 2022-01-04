@@ -7,6 +7,15 @@
 
     </declare-styleable>
 
+    <declare-styleable name="CropImageView">
+        <attr name="cropTop" format="boolean"  />
+        <attr name="cropBottom" format="boolean"  />
+        <attr name="cropLeft" format="boolean"  />
+        <attr name="cropRight" format="boolean"  />
+
+
+    </declare-styleable>
+
     <declare-styleable name="CountDownView">
         <attr name="count_down_progress" format="integer" />
         <attr name="count_down_max" format="integer" />

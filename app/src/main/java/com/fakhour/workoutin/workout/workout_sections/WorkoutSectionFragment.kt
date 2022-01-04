@@ -1,21 +1,17 @@
 package com.fakhour.workoutin.workout.workout_sections
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fakhour.workoutin.R
 import com.fakhour.workoutin.databinding.FragmentWorkoutSectionBinding
-import com.fakhour.workoutin.workout.entities.Workout
-import com.fakhour.workoutin.workout.entities.WorkoutSection
-import java.util.*
+import com.fakhour.workoutin.workout.workout_sections.entities.WorkoutSection
 import kotlin.collections.ArrayList
 
 const val WORKOUT_SECTION_ID = "package com.fakhour.workoutin.workout.workout_sections.WORKOUT_SECTION_ID"

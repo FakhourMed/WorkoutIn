@@ -13,11 +13,8 @@ import android.os.CountDownTimer
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.denzcoskun.imageslider.models.SlideModel
-import com.fakhour.workoutin.workout.entities.WorkoutSection
 import com.fakhour.workoutin.workout.workout_list.START_WORKOUT
 import com.fakhour.workoutin.workout.workout_list.WORKOUT_ID
-import com.fakhour.workoutin.workout.workout_list.WorkoutListViewModel
-import com.fakhour.workoutin.workout.workout_sections.WORKOUT_SECTION_ID
 
 
 class WorkoutDetailFragment : Fragment() {

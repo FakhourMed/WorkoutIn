@@ -8,7 +8,9 @@ import com.fakhour.workoutin.common.api.RetrofitInstance
 import com.fakhour.workoutin.common.api.authentication.RetrofitAuthenticatorInstance
 import com.fakhour.workoutin.common.database.WorkoutDatabase
 import com.fakhour.workoutin.workout.entities.*
-import java.util.*
+import com.fakhour.workoutin.workout.running.entities.Athlete
+import com.fakhour.workoutin.workout.running.entities.RunningToken
+import com.fakhour.workoutin.workout.workout_sections.entities.WorkoutSection
 import java.util.concurrent.Executors
 import kotlin.collections.ArrayList
 
